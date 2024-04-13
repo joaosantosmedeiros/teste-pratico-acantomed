@@ -39,7 +39,7 @@ export class Appointment {
     this.type = type;
 
     if (date < new Date()) {
-      throw new Error('Date must be future. ');
+      throw new Error('Date must be future.');
     }
     this.date = date;
   }
