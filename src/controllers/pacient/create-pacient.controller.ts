@@ -30,8 +30,8 @@ export class CreatePacientController {
         status: 201,
         data: {
           id: pacient.id,
-          email: pacient.email,
           name: pacient.name,
+          email: pacient.email,
           cpf: pacient.cpf,
         },
       });
