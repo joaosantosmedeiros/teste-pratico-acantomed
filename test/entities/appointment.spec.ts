@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import { Appointment } from '../../src/domain/entities/appointment';
+import { Appointment } from '../../src/entities/appointment';
 
 describe('Appointment entity tests', () => {
   it('should throw if an invalid pacientId is passed', () => {

@@ -1,5 +1,5 @@
 import { it, describe, expect } from '@jest/globals';
-import { Pacient } from '../../src/domain/entities/pacient';
+import { Pacient } from '../../src/entities/pacient';
 
 describe('Pacient entity tests', () => {
   it('should generate a random id if no id is passed', () => {
