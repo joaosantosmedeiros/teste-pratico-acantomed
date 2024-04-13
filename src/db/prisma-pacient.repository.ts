@@ -39,9 +39,10 @@ export class PrismaPacientRepository {
     return pacient;
   }
 
-  async list(): Promise<Pacient[]> {
-    throw new Error('Method not implemented.');
+  static async list(): Promise<Pacient[]> {
+    return prisma.pacient.findMany({});
   }
+
   async update(pacient: Pacient): Promise<Pacient> {
     throw new Error('Method not implemented.');
   }
