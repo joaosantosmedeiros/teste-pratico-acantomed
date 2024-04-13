@@ -1,5 +1,5 @@
 import { it, describe, expect } from '@jest/globals';
-import { Pacient } from '../../src/entities/pacient';
+import { Pacient } from '../../src/domain/entities/pacient';
 
 describe('Pacient entity tests', () => {
   it('should not create a pacient with an invalid cpf', () => {

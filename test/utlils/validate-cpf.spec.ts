@@ -1,5 +1,5 @@
 import { it, describe, expect } from '@jest/globals';
-import { validateCpf } from '../../src/utils/validate-cpf';
+import { validateCpf } from '../../src/domain/utils/validate-cpf';
 
 describe('Validate Cpf', () => {
   it('should return false if cpf is less than 11', () => {
