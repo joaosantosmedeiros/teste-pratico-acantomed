@@ -15,28 +15,20 @@ export class PrismaPacientRepository {
     });
   }
 
-  static async findByCPF(cpf: string): Promise<Pacient> {
-    const pacient = await prisma.pacient.findUnique({
+  static async findByCPF(cpf: string): Promise<Pacient | null> {
+    return prisma.pacient.findUnique({
       where: {
         cpf,
       },
     });
-    if (!pacient) {
-      throw new Error('Pacient not found.');
-    }
-    return pacient;
   }
 
-  static async findByEmail(email: string): Promise<Pacient> {
-    const pacient = await prisma.pacient.findUnique({
+  static async findByEmail(email: string): Promise<Pacient | null> {
+    return prisma.pacient.findUnique({
       where: {
         email,
       },
     });
-    if (!pacient) {
-      throw new Error('Pacient not found.');
-    }
-    return pacient;
   }
 
   static async list(): Promise<Pacient[]> {

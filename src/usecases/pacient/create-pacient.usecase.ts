@@ -25,14 +25,12 @@ export class CreatePacientUseCase {
       throw new Error('INVALID_EMAIL');
     }
 
-    const emailIsInUse = await Repository.findByEmail(input.email).catch(
-      () => null,
-    );
+    const emailIsInUse = await Repository.findByEmail(input.email);
     if (emailIsInUse) {
       throw new Error('EMAIL_IN_USE');
     }
 
-    const cpfIsInUse = await Repository.findByCPF(input.cpf).catch(() => null);
+    const cpfIsInUse = await Repository.findByCPF(input.cpf);
     if (cpfIsInUse) {
       throw new Error('CPF_IN_USE');
     }
