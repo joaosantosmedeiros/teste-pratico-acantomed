@@ -35,10 +35,25 @@ export class PrismaPacientRepository {
     return prisma.pacient.findMany({});
   }
 
-  async update(pacient: Pacient): Promise<Pacient> {
-    throw new Error('Method not implemented.');
+  static async update(pacient: Pacient): Promise<Pacient> {
+    return prisma.pacient.update({
+      where: {
+        id: pacient.id,
+      },
+      data: {
+        cpf: pacient.cpf,
+        email: pacient.email,
+        name: pacient.name,
+        password: pacient.password,
+      },
+    });
   }
-  async delete(pacient: Pacient): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  static async delete(pacient: Pacient): Promise<void> {
+    await prisma.pacient.delete({
+      where: {
+        id: pacient.id,
+      },
+    });
   }
 }
