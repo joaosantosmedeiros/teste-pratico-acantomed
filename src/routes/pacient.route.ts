@@ -3,12 +3,14 @@ import { CreatePacientController } from '../controllers/pacient/create-pacient.c
 import { ListPacientsController } from '../controllers/pacient/list-pacients.controller';
 import { FindPacientByCpfController } from '../controllers/pacient/find-pacient-by-cpf.controller';
 import { DeletePacientController } from '../controllers/pacient/delete-pacient.controller';
+import { UpdatePacientController } from '../controllers/pacient/update-pacient.controller';
 
 const router = Router();
 
 router.get('/', ListPacientsController.list);
 router.get('/:cpf', FindPacientByCpfController.findByCpf);
-router.delete('/:cpf', DeletePacientController.delete);
 router.post('/', CreatePacientController.create);
+router.put('/:cpf', UpdatePacientController.update);
+router.delete('/:cpf', DeletePacientController.delete);
 
 export default router;
