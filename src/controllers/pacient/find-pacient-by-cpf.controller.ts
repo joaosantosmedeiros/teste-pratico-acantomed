@@ -6,7 +6,6 @@ export class FindPacientByCpfController {
     try {
       const pacient = await FindPacientByCpfUsecase.execute(req.params.cpf);
       return res.json({
-        status: 200,
         response: 'Pacient found successfully.',
         data: {
           id: pacient.id,
@@ -18,13 +17,11 @@ export class FindPacientByCpfController {
     } catch (error: any) {
       switch (error.message) {
         case 'NOT_FOUND':
-          return res.json({
-            status: 404,
+          return res.status(404).json({
             message: 'Pacient not found.',
           });
         default:
-          return res.json({
-            status: 500,
+          return res.status(500).json({
             message: 'Internal server error',
           });
       }

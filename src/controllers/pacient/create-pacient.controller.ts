@@ -26,8 +26,8 @@ export class CreatePacientController {
         password,
       });
 
-      return res.json({
-        status: 201,
+      return res.status(201).json({
+        message: 'Pacient created successfully',
         data: {
           id: pacient.id,
           name: pacient.name,
@@ -38,39 +38,32 @@ export class CreatePacientController {
     } catch (err: any) {
       switch (err.message) {
         case 'NAME_LENGTH':
-          return res.json({
-            status: 400,
+          return res.status(400).json({
             message: 'Name must be greater or equal to 5 characters.',
           });
         case 'PASSWORD_LENGTH':
-          return res.json({
-            status: 400,
+          return res.status(400).json({
             message: 'Password must be greater or equal to 5 characters.',
           });
         case 'INVALID_EMAIL':
-          return res.json({
-            status: 400,
+          return res.status(400).json({
             message: 'Email must be valid.',
           });
         case 'EMAIL_IN_USE':
-          return res.json({
-            status: 409,
+          return res.status(409).json({
             message: 'Email is already in use',
           });
         case 'INVALID_CPF':
-          return res.json({
-            status: 400,
+          return res.status(400).json({
             message: 'CPF must be valid',
           });
         case 'CPF_IN_USE':
-          return res.json({
-            status: 409,
+          return res.status(409).json({
             message: 'CPF is already in use',
           });
         default:
           console.log(err);
-          return res.json({
-            status: 500,
+          return res.status(500).json({
             message: 'Internal server error',
           });
       }
