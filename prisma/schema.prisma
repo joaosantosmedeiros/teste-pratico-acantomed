@@ -14,9 +14,18 @@ datasource db {
 }
 
 model Pacient {
-  id       String @id @default(uuid())
-  name     String
-  email    String @unique
-  cpf      String @unique
-  password String
+  id          String        @id @default(uuid())
+  name        String
+  email       String        @unique
+  cpf         String        @unique
+  password    String
+  Appointment Appointment[]
+}
+
+model Appointment {
+  id        String   @id @default(uuid())
+  pacientId String
+  Pacient   Pacient  @relation(fields: [pacientId], references: [id])
+  type      String
+  date      DateTime @unique
 }
