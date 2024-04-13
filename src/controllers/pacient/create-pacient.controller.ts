@@ -19,7 +19,7 @@ export class CreatePacientController {
 
     const { cpf, email, name, password } = req.body;
     try {
-      const result = await CreatePacientUseCase.execute({
+      const pacient = await CreatePacientUseCase.execute({
         cpf,
         name,
         email,
@@ -28,7 +28,12 @@ export class CreatePacientController {
 
       return res.json({
         status: 201,
-        data: result,
+        data: {
+          id: pacient.id,
+          email: pacient.email,
+          name: pacient.name,
+          cpf: pacient.cpf,
+        },
       });
     } catch (err: any) {
       switch (err.message) {
