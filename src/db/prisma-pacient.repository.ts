@@ -21,9 +21,8 @@ export class PrismaPacientRepository {
         cpf,
       },
       include: {
-        Appointment: includeAppointments
+        Appointment: includeAppointments,
       },
-      
     });
   }
 

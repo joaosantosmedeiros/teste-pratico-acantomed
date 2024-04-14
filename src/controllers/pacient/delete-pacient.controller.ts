@@ -12,6 +12,11 @@ export class DeletePacientController {
           return res.status(404).json({
             message: 'Pacient not found.',
           });
+        case 'PACIENT_HAS_APOINTMENTS': {
+          return res.status(409).json({
+            message: 'Pacient has appointments.',
+          });
+        }
         default:
           console.log(err);
           return res.status(500).json({
