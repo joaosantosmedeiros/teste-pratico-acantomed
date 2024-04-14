@@ -5,7 +5,7 @@ describe('Appointment entity tests', () => {
   it('should generate an id if no id is passed', () => {
     const appointment = new Appointment({
       date: new Date(),
-      pacientId: '23fcae60-5c08-4637-b30d-100c5651f85d',
+      pacientCpf: '11111111111',
       type: 'any_type',
     });
 
@@ -16,7 +16,7 @@ describe('Appointment entity tests', () => {
     const appointment = new Appointment({
       id: '23fcae60-5c08-4637-b30d-100c5651f85d',
       date: new Date(),
-      pacientId: '23fcae60-5c08-4637-b30d-100c5651f85d',
+      pacientCpf: '11111111111',
       type: 'any_type',
     });
 

@@ -3,19 +3,19 @@ import { validateUUID } from '../utils/validate-uuid';
 
 type AppointmentProps = {
   id?: string;
-  pacientId: string;
+  pacientCpf: string;
   type: string;
   date: Date;
 };
 
 export class Appointment {
   id: string;
-  pacientId: string;
+  pacientCpf: string;
   type: string;
   date: Date;
 
   constructor(props: AppointmentProps) {
-    const { date, type, pacientId, id } = props;
+    const { date, type, pacientCpf, id } = props;
 
     if (id) {
       this.id = id;
@@ -23,7 +23,7 @@ export class Appointment {
       this.id = randomUUID();
     }
 
-    this.pacientId = pacientId;
+    this.pacientCpf = pacientCpf;
     this.type = type;
     this.date = date;
   }

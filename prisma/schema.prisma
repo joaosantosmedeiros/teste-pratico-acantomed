@@ -24,8 +24,8 @@ model Pacient {
 
 model Appointment {
   id        String   @id @default(uuid())
-  pacientId String
-  Pacient   Pacient  @relation(fields: [pacientId], references: [id])
+  pacientCpf String
+  Pacient   Pacient  @relation(fields: [pacientCpf], references: [cpf])
   type      String
   date      DateTime @unique
 }
