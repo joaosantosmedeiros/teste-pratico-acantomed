@@ -1,0 +1,280 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Clinic API",
+    "description": "API with 2 entities for Acantomed application test."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Pacients",
+      "description": "Pacients operations"
+    }
+  ],
+  "paths": {
+    "/pacient": {
+      "get": {
+        "tags": ["Pacients"],
+        "summary": "Get all pacients in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Success message"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Pacient"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Pacients"],
+        "summary": "Create a new pacient in system",
+        "requestBody": {
+          "description": "Pacient Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePacientRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardPacientSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data provided"
+          },
+          "409": {
+            "description": "Provided email/cpf is already in use"
+          },
+          "500": {
+            "description": "Unknown error"
+          }
+        }
+      }
+    },
+    "/pacient/{cpf}": {
+      "get": {
+        "tags": ["Pacients"],
+        "summary": "Get pacient with given CPF",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cpf",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "11111111111"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardPacientSuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pacient not found."
+          },
+          "500": {
+            "description": "Unknown error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update pacient with given CPF",
+        "tags": ["Pacients"],
+        "requestBody": {
+          "description": "Pacient Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePacientRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cpf",
+            "required": true,
+            "description": "Pacient with new values of properties",
+            "schema": {
+              "type": "string",
+              "example": "11111111111"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardPacientSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data provided"
+          },
+          "404": {
+            "description": "Pacient not found"
+          },
+          "409": {
+            "description": "Provided email/cpf already in use"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete pacient with given CPF",
+        "tags": ["Pacients"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cpf",
+            "required": true,
+            "description": "Delete pacient with cpf",
+            "schema": {
+              "type": "string",
+              "example": "11111111111"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Pacient not found."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreatePacientRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "any_name"
+          },
+          "email": {
+            "type": "string",
+            "example": "mail@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "11111111111"
+          }
+        }
+      },
+      "UpdatePacientRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "any_name"
+          },
+          "email": {
+            "type": "string",
+            "example": "mail@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          },
+          "newCpf": {
+            "type": "string",
+            "example": "11111111111"
+          }
+        }
+      },
+      "Pacient": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "23fcae60-5c08-4637-b30d-100c5651f85d"
+          },
+          "name": {
+            "type": "string",
+            "example": "any_name"
+          },
+          "email": {
+            "type": "string",
+            "example": "mail@mail.com"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "11111111111"
+          }
+        }
+      },
+      "StandardPacientSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Success response"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Pacient"
+          }
+        }
+      }
+    }
+  }
+}
