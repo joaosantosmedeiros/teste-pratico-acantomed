@@ -15,11 +15,15 @@ export class PrismaPacientRepository {
     });
   }
 
-  static async findByCPF(cpf: string): Promise<Pacient | null> {
+  static async findByCPF(cpf: string, includeAppointments?: boolean) {
     return prisma.pacient.findUnique({
       where: {
         cpf,
       },
+      include: {
+        Appointment: includeAppointments
+      },
+      
     });
   }
 
