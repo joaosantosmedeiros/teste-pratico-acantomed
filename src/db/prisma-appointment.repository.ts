@@ -30,6 +30,14 @@ export class PrismaAppointmentRepository {
     });
   }
 
+  static async findByPacient(cpf: string): Promise<Appointment[]> {
+    return prisma.appointment.findMany({
+      where: {
+        pacientCpf: cpf,
+      },
+    });
+  }
+
   static async list(): Promise<Appointment[]> {
     return prisma.appointment.findMany();
   }
