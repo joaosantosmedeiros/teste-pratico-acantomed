@@ -6,7 +6,7 @@ export class FindAppointmentByPacientUsecase {
   static async execute(cpf: string): Promise<Appointment[]> {
     const pacientExists = await PacientRepository.findByCPF(cpf);
     if (!pacientExists) {
-      throw new Error('PACIENT_NOT_FOUND');
+      throw new Error('NOT_FOUND');
     }
 
     return AppointmentRepository.findByPacient(cpf);

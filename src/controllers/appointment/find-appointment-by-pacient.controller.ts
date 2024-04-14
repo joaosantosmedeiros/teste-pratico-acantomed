@@ -13,7 +13,7 @@ export class FindAppointmentByPacientController {
       });
     } catch (err: any) {
       switch (err.message) {
-        case 'PACIENT_NOT_FOUND':
+        case 'NOT_FOUND':
           return res.status(404).json({
             message: 'Pacient not found.',
           });

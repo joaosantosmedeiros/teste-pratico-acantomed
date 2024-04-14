@@ -44,7 +44,7 @@ export class CreateAppointmentController {
           return res.status(400).json({
             message: 'Invalid date time',
           });
-        case 'PACIENT_NOT_FOUND':
+        case 'NOT_FOUND':
           return res.status(404).json({
             message: 'Pacient not found.',
           });

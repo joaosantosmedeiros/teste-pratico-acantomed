@@ -29,7 +29,7 @@ export class CreateAppointmentUsecase {
 
     const pacientExists = await PacientRepository.findByCPF(input.pacientCpf);
     if (!pacientExists) {
-      throw new Error('PACIENT_NOT_FOUND');
+      throw new Error('NOT_FOUND');
     }
 
     const appointment = new Appointment({
