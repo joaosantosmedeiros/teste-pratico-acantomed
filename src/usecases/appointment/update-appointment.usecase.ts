@@ -12,7 +12,6 @@ type UpdateAppointmentInput = {
 export class UpdateAppointmentUsecase {
   static async execute(input: UpdateAppointmentInput): Promise<Appointment> {
     const appointmentExists = await AppointmentRepository.findById(input.id);
-    console.log(input);
     if (!appointmentExists) {
       throw new Error('APPOINTMENT_NOT_FOUND');
     }

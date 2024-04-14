@@ -188,6 +188,9 @@
           "204": {
             "description": "OK"
           },
+          "209": {
+            "description": "Pacient has appointments."
+          },
           "404": {
             "description": "Pacient not found."
           },
