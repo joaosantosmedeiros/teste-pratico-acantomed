@@ -15,6 +15,10 @@
     {
       "name": "Pacients",
       "description": "Pacients operations"
+    },
+    {
+      "name": "Appointments",
+      "description": "Appointments operations"
     }
   ],
   "paths": {
@@ -188,11 +192,224 @@
           "204": {
             "description": "OK"
           },
-          "209": {
-            "description": "Pacient has appointments."
-          },
           "404": {
             "description": "Pacient not found."
+          },
+          "409": {
+            "description": "Pacient has appointments."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/appointment": {
+      "post": {
+        "summary": "Create a new appointment",
+        "description": "Create a new appointment",
+        "tags": ["Appointments"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+              }
+            }
+          },
+          "required": true,
+          "description": "Appointment body"
+        },
+        "responses": {
+          "201": {
+            "description": "Appointment created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardAppointmentSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data provided."
+          },
+          "404": {
+            "description": "Pacient not found"
+          },
+          "409": {
+            "description": "Appointment date already in use"
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      },
+      "get": {
+        "summary": "List all appointments",
+        "description": "List all appointments",
+        "tags": ["Appointments"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Listing all appointments"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Appointment"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "string",
+            "example": "6cf32cfc-4438-48f8-a511-c54179d2f32a"
+          },
+          "description": "Appointment id",
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": ["Appointments"],
+        "summary": "Find appointment by id",
+        "description": "Find appointment by id",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardAppointmentSuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Appointment not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Appointments"],
+        "summary": "Update appointment by id",
+        "description": "Update appointment by id",
+        "requestBody": {
+          "required": true,
+          "description": "Appointment object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardAppointmentSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data provided"
+          },
+          "404": {
+            "description": "Appointment/Pacient not found"
+          },
+          "409": {
+            "description": "Appointment date already in use"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Appointments"],
+        "summary": "Delete appointment by id",
+        "description": "Delete appointment by id",
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Appointment not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/appointment/pacient/{cpf}": {
+      "parameters": [
+        {
+          "in": "path",
+          "description": "Pacient cpf",
+          "required": true,
+          "name": "cpf",
+          "schema": {
+            "type": "string",
+            "example": "42614589004"
+          }
+        }
+      ],
+      "description": "Find appointment by pacient",
+      "get": {
+        "tags": ["Appointments"],
+        "summary": "Find appointments by pacient",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Listing all pacient's appointments"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Appointment"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pacient not found"
           },
           "500": {
             "description": "Internal server error"
@@ -275,6 +492,56 @@
           },
           "data": {
             "$ref": "#/components/schemas/Pacient"
+          }
+        }
+      },
+      "CreateAppointmentRequest": {
+        "type": "object",
+        "properties": {
+          "pacientCpf": {
+            "type": "string",
+            "example": "42614589004"
+          },
+          "type": {
+            "type": "string",
+            "example": "pediatric"
+          },
+          "date": {
+            "type": "string",
+            "example": "2025-05-14T20:00:00.000Z"
+          }
+        }
+      },
+      "Appointment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "6cf32cfc-4438-48f8-a511-c54179d2f32a"
+          },
+          "pacientCpf": {
+            "type": "string",
+            "example": "42614589004"
+          },
+          "type": {
+            "type": "string",
+            "example": "pediatric"
+          },
+          "date": {
+            "type": "string",
+            "example": "2025-05-14T20:00:00.000Z"
+          }
+        }
+      },
+      "StandardAppointmentSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Success response"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Appointment"
           }
         }
       }
