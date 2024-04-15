@@ -21,4 +21,8 @@ describe('Validate Cpf', () => {
   it('should return false if all second validation digit does not match', () => {
     expect(validateCpf('44855208036')).toBeFalsy();
   });
+
+  it('should return true for a valid cpf', () => {
+    expect(validateCpf('66985121098')).toBeTruthy();
+  });
 });
